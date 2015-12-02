@@ -1,0 +1,39 @@
+<div class="container">
+
+    <div class="row head">
+        <div class="col-md-12 text-center">
+            Find me the best
+            <select ng-model="category.genre.category">
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+            </select>
+            books about
+            <select ng-model="genre.genre.name">
+                <option value="">All</option>
+                <option ng-repeat="genre in genres | orderBy:genre" value="{{ genre }}">{{ genre }}</option>
+            </select>
+            <input ng-model="search" type="text" placeholder="Search Books">
+        </div>
+    </div>
+
+    <div class="row main">
+        <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="book in filtered = books | filter:search | filter:genre | filter:category:true | startFrom:(currentPage-1)*itemsPerPage | limitTo:itemsPerPage">
+            <div class="book-container">
+                <a href="books/{{ book.id }}">
+                    <img src="{{ book.cover }}" alt="{{ book.name }} cover" class="img-thumbnail center-block"/>
+                    <h5>{{ book.name }}</h5>
+                    <!-- <p>{{ book.genre.category }} - {{ book.genre.name }}</p> -->
+                    <p>By {{ book.author.name }}</p>
+                    <i class="fa fa-heart-o"></i> {{ book.likes }}
+                    <p class="pull-right">{{ timeSince(book.published) }}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <uib-pagination boundary-links="true" max-size="pages" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="Prev" next-text="Next" first-text="First" last-text="Last"></uib-pagination>
+        </div>
+    </div>
+</div>

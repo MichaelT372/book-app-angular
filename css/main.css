@@ -1,0 +1,18 @@
+.head{
+    margin-top: 30px;
+}
+
+.main{
+    margin-top: 30px;
+}
+
+.book-container{
+    margin-bottom: 30px;
+    border:1px solid #000;
+    padding:10px;
+    border-radius:5px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
