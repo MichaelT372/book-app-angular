@@ -16,3 +16,15 @@
 a, a:hover {
     text-decoration: none;
 }
+
+.info-container{
+    margin: 60px 0;
+}
+
+.gray {
+    background-color: #eee;
+}
+
+.author-avatar{
+    margin-top: 100px;
+}

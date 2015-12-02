@@ -1,0 +1,61 @@
+<section class="gray">
+    <div class="container">
+        <div class="row">
+            <a href="/" class="pull-left">Back to all</a>
+            <div class="col-md-6 col-md-offset-3 text-left">
+                <div class="info-container">
+                    <h1>{{ book.name }}</h1>
+                    <h4>By {{ book.author.name }}</h4>
+                    <p>{{ book.description }}</p>
+                    <h4>Categories:</h4>
+                    <p>{{ book.genre.category }}, {{ book.genre.name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <div class="info-container">
+                    <h2>Introduction</h2>
+                    <p ng-repeat="content in book.introduction">{{ content.content }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="info-container">
+                    <img class="img-circle author-avatar" src="{{ book.author.avatar }}" alt="{{ book.author.name }}'s avatar" />
+                    <h3>Written By {{ book.author.name }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="info-container">
+                    <h2>Similar Reading</h2>
+                    <p>If you liked this book, we recommend you check out these emerging titles:</p>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="similarBook in similarBooks | limitTo: limit">
+                    <div class="book-container text-left">
+                        <a href="books/{{ similarBook.id }}">
+                            <img src="{{ similarBook.cover }}" alt="{{ similarBook.name }} cover" class="img-thumbnail center-block"/>
+                            <h5>{{ similarBook.name }}</h5>
+                            <!-- <p>{{ book.genre.category }} - {{ book.genre.name }}</p> -->
+                            <p>By {{ similarBook.author.name }}</p>
+                            <i class="fa fa-heart-o"></i> {{ similarBook.likes }}
+                            <p class="pull-right">{{ timeSince(similarBook.published) }}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

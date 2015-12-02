@@ -11,6 +11,10 @@
 	    $scope.itemsPerPage = 4; //items displayed per page
 	    $scope.pages = 5; //amount of pages to show in pagination bar
 
+        /*
+            These watchers upate the pagination when filtering happens
+        */
+
         $scope.$watch('search', function (newVal, oldVal) {
             $scope.filtered = filterFilter($scope.books, newVal);
             $scope.totalItems = $scope.filtered.length;
@@ -33,6 +37,7 @@
     //injects dependencies to avoid errors with minification
     booksController.$inject = ['$scope', 'filterFilter', 'booksFactory',];
 
+    /* custom filter that keeps track of where ng-repeat is in the pagination */
     angular.module('reedsyApp')
         .filter('startFrom', function () {
             return function (input, start) {

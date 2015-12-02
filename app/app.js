@@ -11,6 +11,6 @@
                 templateUrl: 'app/views/single-book.html'
             })
             .otherwise({ redirectTo: '/' });
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true); //remove the pound sign from URLs
     });
 }());

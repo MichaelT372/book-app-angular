@@ -2604,8 +2604,19 @@
   "name": "Middlemarch",
   "published": "2007-08-07T23:57:12.614Z"
 }];
-
+        /*
+        Keeping the genres in 1 simple place
+        angular will sort them alphabetically in the view
+        */
+        
         factory.genres = ['History', 'Arts', 'Christian Books', 'Fantasy', 'Technology', 'Sciences', 'Children\'s Books', 'Health', 'Cookbooks', 'Parenting', 'Relationships', 'Education', 'Engineering', 'Social Sciences', 'Romance', 'Calendars', 'Comics', 'Religion', 'Law', 'Thriller', 'Sports', 'Business', 'Spirituality', 'Literature', 'Travel', 'Humor', 'Science Fiction', 'Computers', 'Medical Books', 'Politics', 'Self-help', 'Teen', 'Biographies'];
+
+
+        /*
+        Function to convert UTC time into a
+        "time since" output.
+        to do: make it say 1 day instead of 1 days etc
+        */
 
         factory.timeSince = function (date) {
             var olddate = new Date(date);
@@ -2639,9 +2650,40 @@
             return Math.floor(seconds) + " seconds ago";
         }
 
+        /*
+        Getting the book from the id passed to single view page
+        and binding it's object to the view-model
+        */
+
+        factory.getBook = function(id) {
+            var book = {};
+            for (i = 0, len = this.books.length; i < len; i++) {
+                if (this.books[i].id === id) {
+                    book = this.books[i];
+                    break;
+                }
+            }
+            return book;
+        }
+
+        /*
+        simple function for getting the similar books section
+        Improvements:
+            extend from genre name to category if less than 3 results,
+            randomise the books rather than just take the firsr 3
+        */
+
+        factory.getSimilarBooks = function(book) {
+            var books = [];
+            for (i = 0, len = this.books.length; i < len; i++) {
+                if (this.books[i].genre.name === book.genre.name && this.books[i].id !== book.id) {
+                    books.push(this.books[i]);
+                }
+            }
+            return books;
+        }
 
         return factory;
-
     };
 
     angular.module('reedsyApp')
